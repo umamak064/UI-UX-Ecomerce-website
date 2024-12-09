@@ -5,6 +5,7 @@ import Header from "@/components/homepage/Header/index";
 import Reviews from "@/components/homepage/Reviews/index";
 import { Product } from "@/types/product.types";
 import { Review } from "@/types/review.types";
+import ErrorBoundary from "@/components/ErrorBoundry"; // Import the error boundary component
 
 export const newArrivalsData: Product[] = [
   {
@@ -206,8 +207,28 @@ export const reviewsData: Review[] = [
 ];
 
 export default function Home() {
+  // Log data for debugging
+  console.log("New Arrivals Data:", newArrivalsData);
+  console.log("Top Selling Data:", topSellingData);
+  console.log("Related Products Data:", relatedProductData);
+  console.log("Reviews Data:", reviewsData);
+
+  // Check for missing or empty data and handle appropriately
+  if (!newArrivalsData || newArrivalsData.length === 0) {
+    console.warn("New Arrivals data is missing or empty.");
+  }
+  if (!topSellingData || topSellingData.length === 0) {
+    console.warn("Top Selling data is missing or empty.");
+  }
+  if (!relatedProductData || relatedProductData.length === 0) {
+    console.warn("Related Products data is missing or empty.");
+  }
+  if (!reviewsData || reviewsData.length === 0) {
+    console.warn("Reviews data is missing or empty.");
+  }
+
   return (
-    <>
+    <ErrorBoundary>
       <Header />
       <Brands />
       <main className="my-[50px] sm:my-[72px]">
@@ -226,10 +247,11 @@ export default function Home() {
             viewAllLink="/shop#top-selling"
           />
         </div>
-        <div className="mb-[50px] sm:mb-20">
+        <div className="max-w-frame mx-auto px-4 xl:px-0">
+          <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
         </div>
         <Reviews data={reviewsData} />
       </main>
-    </>
+    </ErrorBoundary>
   );
 }

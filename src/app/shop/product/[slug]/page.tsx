@@ -1,7 +1,7 @@
 import {
-    newArrivalsData,
+  
     relatedProductData,
-    topSellingData,
+    
   } from "@/app/page";
   import ProductListSec from "@/components/common/ProductListSec";
   import BreadcrumbProduct from "@/components/product-page/BreadcrumbProduct";
@@ -10,33 +10,41 @@ import {
   import { Product } from "@/types/product.types";
   import { notFound } from "next/navigation";
   
-  const data: Product[] = [
-    ...newArrivalsData,
-    ...topSellingData,
-    ...relatedProductData,
-  ];
+  // Example async function to fetch data
+  async function fetchData() {
+    // Replace with your data fetching logic
+    const response = await fetch("/path/to/data");
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return response.json();
+  }
   
-  export default function ProductPage({
+  export default async function ProductPage({
     params,
   }: {
-    params: { slug: string[] }; // Ensure `slug` is defined as a string array
+    params: { slug?: string[] };
   }) {
-    // Check if `params` and `params.slug` are defined and have elements
+    console.log("Params received during prerendering:", params);
+  
     if (!params?.slug || params.slug.length === 0) {
-      notFound(); // Return a 404 if `params.slug` is undefined or empty
+      console.error("Invalid or missing slug:", params);
+      notFound();
     }
   
     const productId = Number(params.slug[0]);
     if (isNaN(productId)) {
-      notFound(); // Return a 404 if the ID is not a valid number
+      console.error("Invalid product ID:", params.slug[0]);
+      notFound();
     }
   
-    const productData = data.find(
-      (product) => product.id === productId
-    );
+    // Fetch data
+    const data = await fetchData();
   
+    const productData = data.find((product: Product) => product.id === productId);
     if (!productData) {
-      notFound(); // Return a 404 if the product data is not found
+      console.error("Product not found with ID:", productId);
+      notFound();
     }
   
     return (
