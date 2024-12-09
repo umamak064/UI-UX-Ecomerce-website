@@ -10,7 +10,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { FiSliders } from "react-icons/fi";
-import Filters from ".";
+import Filters from "./SizeSection";
 
 const MobileFilters = () => {
   return (
