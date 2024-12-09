@@ -4,8 +4,8 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-export const compareArrays = (a: any[], b: any[]) => {
+export const compareArrays = (a: (string | number)[], b: (string | number)[]): boolean => {
   return a.toString() === b.toString();
 };
+
 

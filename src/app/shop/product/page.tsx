@@ -19,7 +19,7 @@ const data: Product[] = [
 export default function ProductPage({
   params,
 }: {
-  params: { slug: string[] };
+  params: any;
 }) {
   const productData = data.find(
     (product) => product.id === Number(params.slug[0])
