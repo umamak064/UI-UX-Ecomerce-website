@@ -212,6 +212,7 @@ export default function Home() {
   console.log("Top Selling Data:", topSellingData);
   console.log("Related Products Data:", relatedProductData);
   console.log("Reviews Data:", reviewsData);
+  
 
   // Check for missing or empty data and handle appropriately
   if (!newArrivalsData || newArrivalsData.length === 0) {
