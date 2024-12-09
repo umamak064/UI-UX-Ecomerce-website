@@ -1,6 +1,5 @@
-# Milestone-2-Assignment_1
-
-This project is a multi-page website built with Next.js.
+# UI-UX-Ecomerce-website
+made ecomerce website for hackathone2
 
 ## Getting Started
 
